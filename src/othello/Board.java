@@ -112,7 +112,7 @@ public class Board {
      * @see #switchTurn()
      */
     public void placeDisc(Coordinate coordinate) {
-        tiles[coordinate.getX()][coordinate.getY()] = new Disc(playerTurn);
+        tiles[coordinate.x][coordinate.y] = new Disc(playerTurn);
         //TODO logic for updating the board
 
         switchTurn();
