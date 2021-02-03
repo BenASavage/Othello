@@ -112,8 +112,18 @@ public class Board {
      * @see #switchTurn()
      */
     public void placeDisc(Coordinate coordinate) {
-        tiles[coordinate.x][coordinate.y] = new Disc(playerTurn);
+        Disc placedDisc = new Disc(playerTurn);
+        tiles[coordinate.x][coordinate.y] = placedDisc;
         //TODO logic for updating the board
+        //Checks to the right
+        for (int i = coordinate.x + 1; i < tiles[0].length - coordinate.x - 1; i++) {
+            if (placedDisc.equals(tiles[i][coordinate.y]) && i > coordinate.x + 1) {
+                for (int j = coordinate.x + 1; j < i - 1; j++) {
+                    tiles[j][coordinate.y].switchColor();
+                }
+                break;
+            }
+        }
 
         switchTurn();
     }
