@@ -1,6 +1,7 @@
 package othello;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * A Disc is a token that can either be black or white. The token is placed onto the game board and can switch color
@@ -56,5 +57,18 @@ public class Disc {
         } else {
             color = Color.BLACK;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Disc disc = (Disc) o;
+        return Objects.equals(color, disc.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color);
     }
 }
