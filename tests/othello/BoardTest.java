@@ -21,7 +21,7 @@ class BoardTest {
     }
 
     @Test
-    void placeDiscFlipping() {
+    void placeDiscFlippingRight() {
         Board board = new Board();
         board.placeDisc(new Coordinate(5,4));
         assertEquals(Color.BLACK, board.getTiles()[4][4].getColor());
