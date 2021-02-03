@@ -46,7 +46,7 @@ public class Board {
      * @see #Board()
      * @see Disc
      */
-    public Disc[][] initTiles() {
+    private Disc[][] initTiles() {
         Disc[][] tiles = new Disc[8][8];
         tiles[3][3] = new Disc(Color.WHITE);
         tiles[3][4] = new Disc(Color.BLACK);
