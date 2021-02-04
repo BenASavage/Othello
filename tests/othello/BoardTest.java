@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BoardTest {
 
@@ -119,5 +120,6 @@ class BoardTest {
         assertEquals(Color.WHITE, board.getTiles()[2][3].getColor());
         assertEquals(Color.WHITE, board.getTiles()[3][3].getColor());
     }
+
 
 }

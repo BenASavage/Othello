@@ -2,13 +2,11 @@ package othello;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
- * Board is the logical representation of a game of Othello. A Board object is characterized by an 8x8 grid where Discs
- * can be placed. When a Disc is played onto the board, the board updates and switches other Discs on the board as per
- * the rules of Othello. The board class keeps track of player turn and alternates it each time a Disc is placed.
+ * othello.Board is the logical representation of a game of Othello. A othello.Board object is characterized by an 8x8 grid where Discs
+ * can be placed. When a othello.Disc is played onto the board, the board updates and switches other Discs on the board as per
+ * the rules of Othello. The board class keeps track of player turn and alternates it each time a othello.Disc is placed.
  * @see Disc
  */
 public class Board {
@@ -21,14 +19,14 @@ public class Board {
 
     /**
      * Keeps track of whose turn it is. The playerTurn variable can either be Black or White.
-     * Each time a new Disc is placed the playerTurn will alternate.
+     * Each time a new othello.Disc is placed the playerTurn will alternate.
      * @see #placeDisc(Coordinate)
      * @see #switchTurn()
      */
     private Color playerTurn;
 
     /**
-     * Constructor for the Board Class. Calls the initTiles method to instantiate the tiles object. Sets the starting
+     * Constructor for the othello.Board Class. Calls the initTiles method to instantiate the tiles object. Sets the starting
      * player to Black
      * @see #tiles
      * @see #initTiles()
@@ -41,11 +39,11 @@ public class Board {
 
     /**
      * Sets the board to its starting state. <p></p>
-     * This method creates an 8x8 grid, using a 2d Disc array, and fills the center 4 positions/tiles with Discs of
+     * This method creates an 8x8 grid, using a 2d othello.Disc array, and fills the center 4 positions/tiles with Discs of
      * alternating colors (White, Black) such that each color is diagonal to itself. E.g. WB/BW.
      * The pattern starts at (3,3) with white.
-     * Used for the instantiation of the tiles object in the Board constructor.
-     * @return 2d Disc array of size 8x8 with the center four tiles filled with Discs of alternating colors
+     * Used for the instantiation of the tiles object in the othello.Board constructor.
+     * @return 2d othello.Disc array of size 8x8 with the center four tiles filled with Discs of alternating colors
      * @see #tiles
      * @see #Board()
      * @see Disc
@@ -60,7 +58,7 @@ public class Board {
     }
 
     /**
-     * @return 2d Disc array (8x8)
+     * @return 2d othello.Disc array (8x8)
      * @see #tiles
      */
     public Disc[][] getTiles() {
@@ -77,9 +75,9 @@ public class Board {
 
     /**
      * Calculates which positions on the board can be played based on whose turn it currently is.
-     * A tile is playable if it can create a straight line between it and an already played Disc
-     * with at least one Disc of the opposite color in that line.
-     * @return an arrayList of coordinates at which it is legal to place a Disc
+     * A tile is playable if it can create a straight line between it and an already played othello.Disc
+     * with at least one othello.Disc of the opposite color in that line.
+     * @return an arrayList of coordinates at which it is legal to place a othello.Disc
      * @see Coordinate
      * @see #playerTurn
      */
@@ -237,14 +235,14 @@ public class Board {
     }
 
     /**
-     * Places a Disc onto the board and correspondingly flips other Discs to the placed Disc's color and then switches
+     * Places a othello.Disc onto the board and correspondingly flips other Discs to the placed othello.Disc's color and then switches
      * the turn.<p></p>
-     * Creates a new Disc whose color is determined by the playerTurn object in the tiles array at the position
+     * Creates a new othello.Disc whose color is determined by the playerTurn object in the tiles array at the position
      * specified by the x and y values of the coordinate parameter.
-     * Then searches in 8 directions to find a line between the placed Disc and another Disc of the same color, if a
+     * Then searches in 8 directions to find a line between the placed othello.Disc and another othello.Disc of the same color, if a
      * compatible line if found then all Discs in that line (excluding the start and end positions) are flipped.
      * Then calls the switchTurn method.
-     * @param coordinate the location a Disc is to be placed at
+     * @param coordinate the location a othello.Disc is to be placed at
      * @see Disc
      * @see #tiles
      * @see #switchTurn()
