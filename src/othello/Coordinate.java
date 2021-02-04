@@ -1,5 +1,7 @@
 package othello;
 
+import java.util.Objects;
+
 /**
  * A coordinate is a pair of 2 integers, x and y. This class is used to communicate positions in a 2d array.
  */
@@ -20,4 +22,16 @@ public class Coordinate {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordinate that = (Coordinate) o;
+        return x == that.x && y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 }

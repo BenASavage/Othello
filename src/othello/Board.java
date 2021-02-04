@@ -1,6 +1,9 @@
 package othello;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Board is the logical representation of a game of Othello. A Board object is characterized by an 8x8 grid where Discs
@@ -74,14 +77,147 @@ public class Board {
 
     /**
      * Calculates which positions on the board can be played based on whose turn it currently is.
-     * TODO describe the logic behind which tiles are playable and which are not
-     * @return an array of coordinates at which it is legal to place a Disc
+     * A tile is playable if it can create a straight line between it and an already played Disc
+     * with at least one Disc of the opposite color in that line.
+     * @return an arrayList of coordinates at which it is legal to place a Disc
      * @see Coordinate
      * @see #playerTurn
      */
-    public Coordinate[] getPlayableTiles() {
+    public ArrayList<Coordinate> getPlayableTiles() {
         //TODO
-        return null;
+        ArrayList<Coordinate> coordinates = new ArrayList<>();
+
+        for (int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[x].length; y++) {
+                if (tiles[x][y] == null)
+                    continue;
+                if (tiles[x][y].getColor().equals(playerTurn)) {
+
+                    //Checks to the right
+                    try {
+                        if (tiles[x + 1][y] != null
+                                && !tiles[x][y].equals(tiles[x + 1][y])) {
+                            for (int i = x + 2; i < tiles[0].length - 1; i++) {
+                                if (tiles[i][y] == null) {
+                                    coordinates.add(new Coordinate(i, y));
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks diagonally up and right
+                    try {
+                        if (tiles[x + 1][y - 1] != null
+                                && !tiles[x][y].equals(tiles[x + 1][y - 1])) {
+                            int j = y - 2;
+                            for (int i = x + 2; i < tiles[0].length - 1 && j >= 0; i++) {
+                                if (tiles[i][j] == null) {
+                                    coordinates.add(new Coordinate(i, j));
+                                    break;
+                                }
+                                j--;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks upwards
+                    try {
+                        if (tiles[x][y - 1] != null
+                                && !tiles[x][y].equals(tiles[x][y - 1])) {
+                            for (int i = y - 2; i >= 0; i--) {
+                                if (tiles[x][i] == null) {
+                                    coordinates.add(new Coordinate(x, i));
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks diagonally up and left
+                    try {
+                        if (tiles[x - 1][y - 1] != null
+                                && !tiles[x][y].equals(tiles[x - 1][y - 1])) {
+                            int j = y - 2;
+                            for (int i = x - 2; i >= 0 && j >= 0; i--) {
+                                if (tiles[i][j] == null) {
+                                    coordinates.add(new Coordinate(i,j));
+                                    break;
+                                }
+                                j--;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks to the left
+                    try {
+                        if (tiles[x - 1][y] != null
+                                && !tiles[x][y].equals(tiles[x - 1][y])) {
+                            for (int i = x - 2; i >= 0; i--) {
+                                if (tiles[i][y] == null) {
+                                    coordinates.add(new Coordinate(i, y));
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks diagonally down and left
+                    try {
+                        if (tiles[x - 1][y + 1] != null
+                                && !tiles[x][y].equals(tiles[x - 1][y + 1])) {
+                            int j = y + 2;
+                            for (int i = x - 2; i >= 0 && j < tiles[1].length - 1; i--) {
+                                if (tiles[i][j] == null) {
+                                    coordinates.add(new Coordinate(i,j));
+                                    break;
+                                }
+                                j++;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks downwards
+                    try {
+                        if (tiles[x][y + 1] != null
+                                && !tiles[x][y].equals(tiles[x][y + 1])) {
+                            for (int i = y + 2; i < tiles[1].length -  1; i++) {
+                                if (tiles[x][i] == null) {
+                                    coordinates.add(new Coordinate(x, i));
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+
+                    //Checks diagonally down and to the right
+                    try {
+                        if (tiles[x + 1][y + 1] != null
+                                && !tiles[x][y].equals(tiles[x + 1][y + 1])) {
+                            int j = y + 2;
+                            for (int i = x + 2; i < tiles[0].length - 1
+                                    && j < tiles[1].length - 1; i++) {
+                                if (tiles[i][j] == null) {
+                                    coordinates.add(new Coordinate(i, j));
+                                    break;
+                                }
+                                j++;
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+                }
+            }
+        }
+        
+        return coordinates;
     }
 
     /**
@@ -105,7 +241,8 @@ public class Board {
      * the turn.<p></p>
      * Creates a new Disc whose color is determined by the playerTurn object in the tiles array at the position
      * specified by the x and y values of the coordinate parameter.
-     * TODO describe the logic of switching tiles
+     * Then searches in 8 directions to find a line between the placed Disc and another Disc of the same color, if a
+     * compatible line if found then all Discs in that line (excluding the start and end positions) are flipped.
      * Then calls the switchTurn method.
      * @param coordinate the location a Disc is to be placed at
      * @see Disc

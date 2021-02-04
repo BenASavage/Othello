@@ -10,6 +10,10 @@ class BoardTest {
 
     @Test
     void getPlayableTiles() {
+        Board board = new Board();
+        Coordinate testCord = new Coordinate(3, 2);
+        assertEquals(4, board.getPlayableTiles().size());
+        assertTrue(board.getPlayableTiles().contains(testCord));
     }
 
     @Test
@@ -115,4 +119,5 @@ class BoardTest {
         assertEquals(Color.WHITE, board.getTiles()[2][3].getColor());
         assertEquals(Color.WHITE, board.getTiles()[3][3].getColor());
     }
+
 }
