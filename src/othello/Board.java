@@ -116,12 +116,11 @@ public class Board {
         Disc placedDisc = new Disc(playerTurn);
         tiles[coordinate.x][coordinate.y] = placedDisc;
 
-        //TODO logic for updating the board
         //Checks to the right
         try {
             if (tiles[coordinate.x + 1][coordinate.y] != null
                     && !placedDisc.equals(tiles[coordinate.x + 1][coordinate.y])) {
-                for (int i = coordinate.x + 2; i < tiles[0].length - coordinate.x - 1; i++) {
+                for (int i = coordinate.x + 2; i < tiles[0].length - 1; i++) {
                     if (placedDisc.equals(tiles[i][coordinate.y])) {
                         for (int j = coordinate.x + 1; j < i; j++) {
                             tiles[j][coordinate.y].switchColor();
@@ -138,7 +137,7 @@ public class Board {
             if (tiles[coordinate.x + 1][coordinate.y - 1] != null
                     && !placedDisc.equals(tiles[coordinate.x + 1][coordinate.y - 1])) {
                 int j = coordinate.y - 2;
-                for (int i = coordinate.x + 2; i < tiles[0].length - coordinate.x - 1 && j >= 0; i++) {
+                for (int i = coordinate.x + 2; i < tiles[0].length - 1 && j >= 0; i++) {
                     if (placedDisc.equals(tiles[i][j])) {
                         int h = coordinate.y - 1;
                         for (int k = coordinate.x + 1; k < i; k++) {
@@ -156,8 +155,8 @@ public class Board {
         //Checks upwards
         try {
             if (tiles[coordinate.x][coordinate.y - 1] != null
-                    && !placedDisc.equals(tiles[coordinate.x][coordinate.y + 1])) {
-                for (int i = coordinate.y - 2; i > 0; i--) {
+                    && !placedDisc.equals(tiles[coordinate.x][coordinate.y - 1])) {
+                for (int i = coordinate.y - 2; i >= 0; i--) {
                     if (placedDisc.equals(tiles[coordinate.x][i])) {
                         for (int j = coordinate.y - 1; j > i; j--) {
                             tiles[coordinate.x][j].switchColor();
@@ -170,18 +169,98 @@ public class Board {
         }
 
         //Checks diagonally up and left
-
+        try {
+            if (tiles[coordinate.x - 1][coordinate.y - 1] != null
+                    && !placedDisc.equals(tiles[coordinate.x - 1][coordinate.y - 1])) {
+                int j = coordinate.y - 2;
+                for (int i = coordinate.x - 2; i >= 0 && j >= 0; i--) {
+                    if (placedDisc.equals(tiles[i][j])) {
+                        int h = coordinate.y - 1;
+                        for (int k = coordinate.x - 1; k > i; k--) {
+                            tiles[k][h].switchColor();
+                            h--;
+                        }
+                        break;
+                    }
+                    j--;
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+        }
 
         //Checks to the left
-
+        try {
+            if (tiles[coordinate.x - 1][coordinate.y] != null
+                    && !placedDisc.equals(tiles[coordinate.x - 1][coordinate.y])) {
+                for (int i = coordinate.x - 2; i >= 0; i--) {
+                    if (placedDisc.equals(tiles[i][coordinate.y])) {
+                        for (int j = coordinate.x - 1; j > i; j--) {
+                            tiles[j][coordinate.y].switchColor();
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+        }
 
         //Checks diagonally down and left
-
+        try {
+            if (tiles[coordinate.x - 1][coordinate.y + 1] != null
+                    && !placedDisc.equals(tiles[coordinate.x - 1][coordinate.y + 1])) {
+                int j = coordinate.y + 2;
+                for (int i = coordinate.x - 2; i >= 0 && j < tiles[1].length - 1; i--) {
+                    if (placedDisc.equals(tiles[i][j])) {
+                        int h = coordinate.y + 1;
+                        for (int k = coordinate.x - 1; k > i; k--) {
+                            tiles[k][h].switchColor();
+                            h++;
+                        }
+                        break;
+                    }
+                    j++;
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+        }
 
         //Checks downwards
-
+        try {
+            if (tiles[coordinate.x][coordinate.y + 1] != null
+                    && !placedDisc.equals(tiles[coordinate.x][coordinate.y + 1])) {
+                for (int i = coordinate.y + 2; i < tiles[1].length -  1; i++) {
+                    if (placedDisc.equals(tiles[coordinate.x][i])) {
+                        for (int j = coordinate.y + 1; j < i; j++) {
+                            tiles[coordinate.x][j].switchColor();
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+        }
 
         //Checks diagonally down and to the right
+        try {
+            if (tiles[coordinate.x + 1][coordinate.y + 1] != null
+                    && !placedDisc.equals(tiles[coordinate.x + 1][coordinate.y + 1])) {
+                int j = coordinate.y + 2;
+                for (int i = coordinate.x + 2; i < tiles[0].length - 1
+                        && j < tiles[1].length - 1; i++) {
+                    if (placedDisc.equals(tiles[i][j])) {
+                        int h = coordinate.y + 1;
+                        for (int k = coordinate.x + 1; k < i; k++) {
+                            tiles[k][h].switchColor();
+                            h++;
+                        }
+                        break;
+                    }
+                    j++;
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+        }
+
 
         switchTurn();
     }
