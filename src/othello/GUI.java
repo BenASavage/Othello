@@ -109,12 +109,6 @@ public class GUI extends JFrame {
      * @return
      */
     private JPanel initBoardPanel() {
-        ArrayList<Coordinate> playableTiles = board.getPlayableTiles();
-        if (playableTiles.isEmpty()) {
-            //TODO show who wins
-            JOptionPane.showMessageDialog(mainPanel, "GAME OVER");
-        }
-
         boardPanel.removeAll();
 
         boardPanel.setBorder(new EmptyBorder(2, 2, 2, 2));
@@ -122,7 +116,7 @@ public class GUI extends JFrame {
         boardPanel.setLayout(new GridLayout(8, 8, 4, 4));
 
 
-
+        ArrayList<Coordinate> playableTiles = board.getPlayableTiles();
         for (int row = 0; row < board.getTiles().length; row++) {
             for (int col = 0; col < board.getTiles()[row].length; col++) {
                 JButton btnTile = new JButton("");
@@ -150,11 +144,11 @@ public class GUI extends JFrame {
                 btnTile.addActionListener(e -> {
                     //TODO
                     Coordinate cord = new Coordinate(finalRow, finalCol);
-                    if (board.getPlayableTiles().contains(cord)) {
+                    if (playableTiles.contains(cord)) {
                         board.placeDisc(cord);
-                        initBoardPanel();
                         boardPanel.repaint();
                         boardPanel.revalidate();
+                        initBoardPanel();
                     }
 
                 });
@@ -162,6 +156,10 @@ public class GUI extends JFrame {
                 boardPanel.add(btnTile);
             }
 
+        }
+        if (playableTiles.isEmpty()) {
+            //TODO show who wins
+            JOptionPane.showMessageDialog(mainPanel, "GAME OVER");
         }
         return boardPanel;
     }
@@ -182,8 +180,15 @@ public class GUI extends JFrame {
             controlPanel.add(lblTitle, BorderLayout.CENTER);
         }
         {
-            JButton btnStart = new JButton("Start");
-            controlPanel.add(btnStart, BorderLayout.EAST);
+            JButton btnNewGame = new JButton("New Game");
+            btnNewGame.setFocusPainted(false);
+            btnNewGame.addActionListener(e -> {
+                board = new Board();
+                initBoardPanel();
+                mainPanel.repaint();
+                mainPanel.revalidate();
+            });
+            controlPanel.add(btnNewGame, BorderLayout.EAST);
         }
         {
             JLabel lblGameState = new JLabel("Turn");

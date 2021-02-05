@@ -82,7 +82,6 @@ public class Board {
      * @see #playerTurn
      */
     public ArrayList<Coordinate> getPlayableTiles() {
-        //TODO
         ArrayList<Coordinate> coordinates = new ArrayList<>();
 
         for (int x = 0; x < tiles.length; x++) {
@@ -95,9 +94,12 @@ public class Board {
                     try {
                         if (tiles[x + 1][y] != null
                                 && !tiles[x][y].equals(tiles[x + 1][y])) {
-                            for (int i = x + 2; i < tiles[0].length - 1; i++) {
+                            for (int i = x + 2; i < tiles[0].length; i++) {
                                 if (tiles[i][y] == null) {
                                     coordinates.add(new Coordinate(i, y));
+                                    break;
+                                }
+                                if (tiles[i][y].equals(tiles[x][y])){
                                     break;
                                 }
                             }
@@ -110,9 +112,12 @@ public class Board {
                         if (tiles[x + 1][y - 1] != null
                                 && !tiles[x][y].equals(tiles[x + 1][y - 1])) {
                             int j = y - 2;
-                            for (int i = x + 2; i < tiles[0].length - 1 && j >= 0; i++) {
+                            for (int i = x + 2; i < tiles[0].length && j >= 0; i++) {
                                 if (tiles[i][j] == null) {
                                     coordinates.add(new Coordinate(i, j));
+                                    break;
+                                }
+                                if (tiles[i][j].equals(tiles[x][y])){
                                     break;
                                 }
                                 j--;
@@ -130,6 +135,9 @@ public class Board {
                                     coordinates.add(new Coordinate(x, i));
                                     break;
                                 }
+                                if (tiles[x][i].equals(tiles[x][y])){
+                                    break;
+                                }
                             }
                         }
                     } catch (ArrayIndexOutOfBoundsException ignored) {
@@ -143,6 +151,9 @@ public class Board {
                             for (int i = x - 2; i >= 0 && j >= 0; i--) {
                                 if (tiles[i][j] == null) {
                                     coordinates.add(new Coordinate(i,j));
+                                    break;
+                                }
+                                if (tiles[i][j].equals(tiles[x][y])){
                                     break;
                                 }
                                 j--;
@@ -160,6 +171,9 @@ public class Board {
                                     coordinates.add(new Coordinate(i, y));
                                     break;
                                 }
+                                if (tiles[i][y].equals(tiles[x][y])){
+                                    break;
+                                }
                             }
                         }
                     } catch (ArrayIndexOutOfBoundsException ignored) {
@@ -170,9 +184,12 @@ public class Board {
                         if (tiles[x - 1][y + 1] != null
                                 && !tiles[x][y].equals(tiles[x - 1][y + 1])) {
                             int j = y + 2;
-                            for (int i = x - 2; i >= 0 && j < tiles[1].length - 1; i--) {
+                            for (int i = x - 2; i >= 0 && j < tiles[1].length; i--) {
                                 if (tiles[i][j] == null) {
                                     coordinates.add(new Coordinate(i,j));
+                                    break;
+                                }
+                                if (tiles[i][j].equals(tiles[x][y])){
                                     break;
                                 }
                                 j++;
@@ -185,9 +202,12 @@ public class Board {
                     try {
                         if (tiles[x][y + 1] != null
                                 && !tiles[x][y].equals(tiles[x][y + 1])) {
-                            for (int i = y + 2; i < tiles[1].length -  1; i++) {
+                            for (int i = y + 2; i < tiles[1].length; i++) {
                                 if (tiles[x][i] == null) {
                                     coordinates.add(new Coordinate(x, i));
+                                    break;
+                                }
+                                if (tiles[x][i].equals(tiles[x][y])){
                                     break;
                                 }
                             }
@@ -200,10 +220,13 @@ public class Board {
                         if (tiles[x + 1][y + 1] != null
                                 && !tiles[x][y].equals(tiles[x + 1][y + 1])) {
                             int j = y + 2;
-                            for (int i = x + 2; i < tiles[0].length - 1
-                                    && j < tiles[1].length - 1; i++) {
+                            for (int i = x + 2; i < tiles[0].length
+                                    && j < tiles[1].length; i++) {
                                 if (tiles[i][j] == null) {
                                     coordinates.add(new Coordinate(i, j));
+                                    break;
+                                }
+                                if (tiles[i][j].equals(tiles[x][y])){
                                     break;
                                 }
                                 j++;
