@@ -142,7 +142,6 @@ public class GUI extends JFrame {
                 int finalRow = row;
                 int finalCol = col;
                 btnTile.addActionListener(e -> {
-                    //TODO
                     Coordinate cord = new Coordinate(finalRow, finalCol);
                     if (playableTiles.contains(cord)) {
                         board.placeDisc(cord);
@@ -158,8 +157,9 @@ public class GUI extends JFrame {
 
         }
         if (playableTiles.isEmpty()) {
-            //TODO show who wins
-            JOptionPane.showMessageDialog(mainPanel, "GAME OVER");
+            int[] discCount = board.getDiscCount();
+            JOptionPane.showMessageDialog(mainPanel, "GAME OVER\n" +
+                    (discCount[0] > discCount[1] ? "Black ": "White ") + "Wins!");
         }
         return boardPanel;
     }

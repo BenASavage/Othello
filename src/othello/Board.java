@@ -422,4 +422,28 @@ public class Board {
 
         switchTurn();
     }
+
+    /**
+     * Counts the number of Black Discs and the number of White Discs on the board.
+     * @return an int array, the first element corresponding to the amount of Black Discs and the second to the number
+     * of White
+     */
+    public int[] getDiscCount() {
+        int blackDiscs = 0;
+        int whiteDiscs = 0;
+
+        for (Disc[] innerArray : tiles) {
+            for (Disc el : innerArray) {
+                if (el != null) {
+                    if (el.getColor().equals(Color.BLACK)) {
+                        blackDiscs++;
+                    } else {
+                        whiteDiscs++;
+                    }
+                }
+            }
+        }
+
+        return new int[]{blackDiscs, whiteDiscs};
+    }
 }
