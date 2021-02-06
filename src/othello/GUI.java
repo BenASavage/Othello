@@ -29,6 +29,9 @@ public class GUI extends JFrame {
     private Board board = new Board();
     private JPanel mainPanel;
     private JPanel boardPanel = new JPanel();
+    private JLabel lblBlkCount = new JLabel();
+    private JLabel lblWhiteCount = new JLabel();
+    private JLabel lblGameState = new JLabel("Black Turn");
 
     /**
      * Launch the application.
@@ -82,8 +85,11 @@ public class GUI extends JFrame {
      */
     private JPanel createWhitePanel() {
         JPanel whitePanel = new JPanel();
-        JLabel lblWhitePlayer = new JLabel("White Discs");
+        JLabel lblWhitePlayer = new JLabel("White Discs:");
         whitePanel.add(lblWhitePlayer);
+
+        lblWhiteCount = new JLabel("0");
+        whitePanel.add(lblWhiteCount);
         return whitePanel;
     }
 
@@ -95,8 +101,11 @@ public class GUI extends JFrame {
      */
     private JPanel createBlkPanel() {
         JPanel blkPanel = new JPanel();
-        JLabel lblBlkPlayer = new JLabel("Black Discs");
+        JLabel lblBlkPlayer  = new JLabel("Black Discs:");
         blkPanel.add(lblBlkPlayer);
+
+        lblBlkCount = new JLabel("0");
+        blkPanel.add(lblBlkCount);
         return blkPanel;
     }
 
@@ -145,6 +154,12 @@ public class GUI extends JFrame {
                     Coordinate cord = new Coordinate(finalRow, finalCol);
                     if (playableTiles.contains(cord)) {
                         board.placeDisc(cord);
+                        lblBlkCount.setText("" + board.getDiscCount()[0] + "");
+                        lblWhiteCount.setText("" + board.getDiscCount()[1] + "");
+                        if(board.getPlayerTurn() == Color.BLACK)
+                            lblGameState.setText("Black Turn");
+                        else
+                            lblGameState.setText("White Turn");
                         boardPanel.repaint();
                         boardPanel.revalidate();
                         initBoardPanel();
@@ -184,6 +199,9 @@ public class GUI extends JFrame {
             btnNewGame.setFocusPainted(false);
             btnNewGame.addActionListener(e -> {
                 board = new Board();
+                lblGameState.setText("Black Turn");
+                lblBlkCount.setText("0");
+                lblWhiteCount.setText("0");
                 initBoardPanel();
                 mainPanel.repaint();
                 mainPanel.revalidate();
