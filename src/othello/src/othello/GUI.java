@@ -28,8 +28,8 @@ public class GUI extends JFrame {
      *
      */
     private static final long serialVersionUID = 9185851023736830551L;
-    private ImageIcon[] discIcons = { new ImageIcon(TileButton.class.getResource("/othello/resources/BlackIcon.png")),
-            new ImageIcon(TileButton.class.getResource("/othello/resources/WhiteIcon.png")) };
+    private ImageIcon[] discIcons = { new ImageIcon(("src/images/BlackIcon.png")),
+            new ImageIcon(("src/images/WhiteIcon.png")) };
     private Board board = new Board();
     private JPanel mainPanel;
     private JPanel boardPanel = new JPanel();
@@ -137,7 +137,7 @@ public class GUI extends JFrame {
         ArrayList<Coordinate> playableTiles = board.getPlayableTiles();
         for (int row = 0; row < board.getTiles().length; row++) {
             for (int col = 0; col < board.getTiles()[row].length; col++) {
-                TileButton btnTile = new TileButton();
+                JButton btnTile = new JButton();
                 btnTile.setEnabled(false);
                 btnTile.setOpaque(true);
                 btnTile.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));

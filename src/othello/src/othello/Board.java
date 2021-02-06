@@ -237,7 +237,7 @@ public class Board {
                 }
             }
         }
-        
+
         return coordinates;
     }
 
