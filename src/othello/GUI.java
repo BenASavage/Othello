@@ -191,7 +191,6 @@ public class GUI extends JFrame {
             controlPanel.add(btnNewGame, BorderLayout.EAST);
         }
         {
-            JLabel lblGameState = new JLabel("Turn");
             lblGameState.setBorder(new EmptyBorder(2, 0, 2, 5));
             lblGameState.setHorizontalAlignment(SwingConstants.RIGHT);
             controlPanel.add(lblGameState, BorderLayout.SOUTH);
