@@ -36,7 +36,7 @@ public class GUI extends JFrame {
     private JLabel lblBlkCount;
     private JLabel lblWhiteCount;
     private Color turn;
-    private JLabel lblGameState = new JLabel("Turn");
+    private JLabel lblGameState = new JLabel("Black Turn");
 
 
 
@@ -177,9 +177,9 @@ public class GUI extends JFrame {
                         lblBlkCount.setText("" + board.getDiscCount()[0] + "");
                         lblWhiteCount.setText("" + board.getDiscCount()[1] + "");
                         if(board.getPlayerTurn() == Color.BLACK)
-                            lblGameState.setText("Black Player's Turn");
+                            lblGameState.setText("Black Turn");
                         else
-                            lblGameState.setText("White Player's Turn");
+                            lblGameState.setText("White Turn");
                         boardPanel.repaint();
                         boardPanel.revalidate();
                         initBoardPanel();
