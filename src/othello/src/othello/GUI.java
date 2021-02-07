@@ -23,8 +23,8 @@ public class GUI extends JFrame {
     private JPanel mainPanel;
     private JPanel boardPanel = new JPanel();
     private JLabel lblGameState = new JLabel("Black Turn");
-    private JLabel lblBlkPlayer = new JLabel("Black Discs: " + board.getDiscCount()[0]);
-    private JLabel lblWhitePlayer = new JLabel("White Discs: " + board.getDiscCount()[1]);
+    private JLabel lblBlkScore = new JLabel(board.getDiscCount()[0] + "");
+    private JLabel lblWhiteScore = new JLabel(board.getDiscCount()[1] + "");
 
 
     /**
@@ -75,29 +75,42 @@ public class GUI extends JFrame {
 
     /**
      * Creates a panel to hold white disc icons and a border color that reflects
-     * player turn
+     * player turn and the number of spaces controlled on the board.
      *
      * @return
      */
     private JPanel createWhitePanel() {
         JPanel whitePanel = new JPanel();
         whitePanel.setLayout(new BorderLayout(0, 0));
-        lblWhitePlayer.setBorder(new EmptyBorder(0, 4, 0, 4));
-        whitePanel.add(lblWhitePlayer, BorderLayout.CENTER);
+
+        JLabel whiteLbl = new JLabel("White Discs:");
+        whiteLbl.setBorder(new EmptyBorder(100, 5, 0, 5));
+        whitePanel.add(whiteLbl, BorderLayout.NORTH);
+        lblWhiteScore.setFont(new Font("Lucida Grande", Font.BOLD, 33));
+        lblWhiteScore.setHorizontalAlignment(SwingConstants.CENTER);
+        lblWhiteScore.setBorder(new EmptyBorder(0, 5, 0, 5));
+        whitePanel.add(lblWhiteScore, BorderLayout.CENTER);
         return whitePanel;
     }
 
     /**
      * Creates a panel to hold black disc icons and a border color that reflects
-     * player turn
+     * player turn and the number of spaces controlled on the board.
      *
      * @return
      */
     private JPanel createBlkPanel() {
         JPanel blkPanel = new JPanel();
         blkPanel.setLayout(new BorderLayout(0, 0));
-        lblBlkPlayer.setBorder(new EmptyBorder(0, 4, 0, 4));
-        blkPanel.add(lblBlkPlayer, BorderLayout.CENTER);
+
+        JLabel blkLbl = new JLabel("Black Discs:");
+        blkLbl.setBorder(new EmptyBorder(100, 5, 0, 5));
+        blkPanel.add(blkLbl, BorderLayout.NORTH);
+        ;
+        lblBlkScore.setBorder(new EmptyBorder(0, 5, 5, 0));
+        lblBlkScore.setHorizontalAlignment(SwingConstants.CENTER);
+        lblBlkScore.setFont(new Font("Lucida Grande", Font.BOLD, 33));
+        blkPanel.add(lblBlkScore, BorderLayout.CENTER);
         return blkPanel;
     }
 
@@ -155,8 +168,8 @@ public class GUI extends JFrame {
                     if (playableTiles.contains(cord)) {
                         board.placeDisc(cord);
 
-                        lblBlkPlayer.setText("Black Discs: " + board.getDiscCount()[0] + "");
-                        lblWhitePlayer.setText("White Discs: " + board.getDiscCount()[1] + "");
+                        lblBlkScore.setText(board.getDiscCount()[0] + "");
+                        lblWhiteScore.setText(board.getDiscCount()[1] + "");
                         if (board.getPlayerTurn() == Color.BLACK)
                             lblGameState.setText("Black Turn");
                         else
@@ -204,8 +217,8 @@ public class GUI extends JFrame {
                 board = new Board();
                 initBoardPanel();
                 lblGameState.setText("Black Turn");
-                lblBlkPlayer.setText("Black Discs: " + board.getDiscCount()[0]);
-                lblWhitePlayer.setText("White Discs: " + board.getDiscCount()[1]);
+                lblBlkScore.setText(board.getDiscCount()[0] + "");
+                lblWhiteScore.setText(board.getDiscCount()[1] + "");
                 mainPanel.repaint();
                 mainPanel.revalidate();
             });
