@@ -60,7 +60,7 @@ public class GUI extends JFrame {
      */
     public GUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 550, 500);
+        setBounds(100, 100, 950, 800);
         mainPanel = new JPanel();
         mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         mainPanel.setLayout(new BorderLayout(0, 0));
@@ -169,6 +169,7 @@ public class GUI extends JFrame {
                     Coordinate cord = new Coordinate(finalRow, finalCol);
                     if (playableTiles.contains(cord)) {
                         board.placeDisc(cord);
+
                         lblBlkCount.setText("" + board.getDiscCount()[0] + "");
                         lblWhiteCount.setText("" + board.getDiscCount()[1] + "");
                         if(board.getPlayerTurn() == Color.BLACK)
@@ -216,6 +217,7 @@ public class GUI extends JFrame {
             btnNewGame.addActionListener(e -> {
                 board = new Board();
                 initBoardPanel();
+                lblGameState.setText("Black Turn");
                 mainPanel.repaint();
                 mainPanel.revalidate();
             });
