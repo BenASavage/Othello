@@ -2,7 +2,6 @@ package othello;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,11 +10,7 @@ import java.awt.Color;
 
 import javax.swing.border.BevelBorder;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.awt.Point;
 
 /**
  * The purpose of OthelloGUI is to play the game Othello.
