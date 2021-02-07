@@ -1,12 +1,9 @@
 package othello;
 
 import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.border.BevelBorder;
-
 import java.util.ArrayList;
 
 /**
@@ -20,8 +17,8 @@ import java.util.ArrayList;
 public class GUI extends JFrame {
 
     private static final long serialVersionUID = 9185851023736830551L;
-    private ImageIcon[] discIcons = {new ImageIcon(("src/images/Black75.png")),
-            new ImageIcon(("src/images/White75.png"))};
+    private ImageIcon[] discIcons = {new ImageIcon(("src/images/Black100.png")),
+            new ImageIcon(("src/images/White100.png"))};
     private Board board = new Board();
     private JPanel mainPanel;
     private JPanel boardPanel = new JPanel();
