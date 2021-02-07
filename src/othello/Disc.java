@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Disc {
 
     /**
-     * The color object refers to which java awt Color the Disc is currently. The two states the othello.Disc can be is black
+     * The color object refers to which java awt Color the Disc is currently. The two states the Disc can be is black
      * or white. The initial state is passed into the Disc constructor.
      * @see #Disc(Color)
      */
