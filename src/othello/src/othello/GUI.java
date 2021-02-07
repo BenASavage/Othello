@@ -10,15 +10,15 @@ import javax.swing.border.BevelBorder;
 import java.util.ArrayList;
 
 /**
- * The purpose of OthelloGUI is to play the game Othello.
+ * The purpose of GUI is to create a graphical representation of
+ * a game of Othello. It is a container for a boardPanel that is a representation
+ * of the board. Also holds panels and labels to give the player information about
+ * player turn and the score of the game
  *
- * @author Steven Ferguson
+ * @author Steven Ferguson + Benjamin Savage
  */
 public class GUI extends JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 9185851023736830551L;
     private ImageIcon[] discIcons = {new ImageIcon(("src/images/Black75.png")),
             new ImageIcon(("src/images/White75.png"))};
@@ -31,7 +31,7 @@ public class GUI extends JFrame {
 
 
     /**
-     * Launch the application.
+     * Launch the application. Sets the frame size to be fixed.
      */
     public static void main(String[] args) {
 
@@ -49,7 +49,7 @@ public class GUI extends JFrame {
     }
 
     /**
-     * Constructs the gui which consists of panels for controls. Also holds the
+     * Constructs the gui which consists of panels for controls. Holds the
      * board and disc panels.
      * <p>
      * Create the frame.
@@ -105,21 +105,22 @@ public class GUI extends JFrame {
     }
 
     /**
-     * Creates a board of 64 JButtons, representing a game board.
+     * Creates a board of 64 JButtons, representing a game board. Buttons are
+     * disabled by default. If the coordinate for a button has been assigned a Color
+     * value, that button is enabled and an appropriate disc icon is set on that
+     * button. Also updates the lblGameState and disc count labels.
+     *
      * <p>
      * On click the buttons paint an icon if the JButton coordinate is a playable
      * one.
      *
-     * @return
+     * @return visual representation of the board
      */
     private JPanel initBoardPanel() {
         boardPanel.removeAll();
-
-        //sets the board panel color, background and border.
         boardPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
         boardPanel.setBackground(new Color(65, 156, 124));
         boardPanel.setLayout(new GridLayout(8, 8, 4, 4));
-
 
         ArrayList<Coordinate> playableTiles = board.getPlayableTiles();
         for (int row = 0; row < board.getTiles().length; row++) {
@@ -130,25 +131,19 @@ public class GUI extends JFrame {
                 btnTile.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
                 btnTile.setBackground(new Color(65, 156, 124));
 
-                //if the button at index is not null the background gets set to that color.
                 if (board.getTiles()[row][col] != null) {
 
                     btnTile.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-                    //btnTile.setBackground(board.getTiles()[row][col].getColor());
-
                     if (board.getTiles()[row][col].getColor() == Color.BLACK) {
                         btnTile.setIcon(discIcons[0]);
                         btnTile.setEnabled(true);
-
-                    }  else{
-                        btnTile.setIcon(discIcons[1]);}
-                        btnTile.setEnabled(true);
+                    } else {
+                        btnTile.setIcon(discIcons[1]);
+                    }
+                    btnTile.setEnabled(true);
                 }
 
-
-                //iterates the tiles array, creating a JButton for each object in the array.
-                //sets the tile border and background. all tiles are initially disabled.
                 if (playableTiles.contains(new Coordinate(row, col))) {
                     btnTile.setBorder(new BevelBorder(BevelBorder.RAISED, null, Color.YELLOW, null, Color.YELLOW));
                     btnTile.setContentAreaFilled(false);
@@ -177,10 +172,9 @@ public class GUI extends JFrame {
                 });
 
                 boardPanel.add(btnTile);
-
             }
-
         }
+
         if (playableTiles.isEmpty()) {
             int[] discCount = board.getDiscCount();
             JOptionPane.showMessageDialog(mainPanel, "GAME OVER\n" +
@@ -192,7 +186,8 @@ public class GUI extends JFrame {
     /**
      * Instantiates a control panel of type JPanel.
      * <p>
-     * Contains a buttons to start and reset the game.
+     * Contains a New Game button that when pressed resets the Turn label
+     * and resets the disc count array.
      *
      * @return controlPanel
      */
