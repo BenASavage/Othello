@@ -28,10 +28,9 @@ public class GUI extends JFrame {
     private Board board = new Board();
     private JPanel mainPanel;
     private JPanel boardPanel = new JPanel();
-    private JLabel lblBlkCount;
-    private JLabel lblWhiteCount;
-    private Color turn;
     private JLabel lblGameState = new JLabel("Black Turn");
+    private JLabel lblBlkPlayer = new JLabel("Black Discs: " + board.getDiscCount()[0]);
+    private JLabel lblWhitePlayer = new JLabel("White Discs: " + board.getDiscCount()[1]);
 
 
 
@@ -88,11 +87,9 @@ public class GUI extends JFrame {
      */
     private JPanel createWhitePanel() {
         JPanel whitePanel = new JPanel();
-        JLabel lblWhitePlayer = new JLabel("White Discs:");
-        whitePanel.add(lblWhitePlayer);
-
-        lblWhiteCount = new JLabel("0");
-        whitePanel.add(lblWhiteCount);
+        whitePanel.setLayout(new BorderLayout(0, 0));
+        lblWhitePlayer.setBorder(new EmptyBorder(0, 4, 0, 4));
+        whitePanel.add(lblWhitePlayer, BorderLayout.CENTER);
         return whitePanel;
     }
 
@@ -104,11 +101,9 @@ public class GUI extends JFrame {
      */
     private JPanel createBlkPanel() {
         JPanel blkPanel = new JPanel();
-        JLabel lblBlkPlayer  = new JLabel("Black Discs:");
-        blkPanel.add(lblBlkPlayer);
-
-        lblBlkCount = new JLabel("0");
-        blkPanel.add(lblBlkCount);
+        blkPanel.setLayout(new BorderLayout(0, 0));
+        lblBlkPlayer.setBorder(new EmptyBorder(0, 4, 0, 4));
+        blkPanel.add(lblBlkPlayer, BorderLayout.CENTER);
         return blkPanel;
     }
 
@@ -170,8 +165,8 @@ public class GUI extends JFrame {
                     if (playableTiles.contains(cord)) {
                         board.placeDisc(cord);
 
-                        lblBlkCount.setText("" + board.getDiscCount()[0] + "");
-                        lblWhiteCount.setText("" + board.getDiscCount()[1] + "");
+                        lblBlkPlayer.setText("Black Discs: " + board.getDiscCount()[0] + "");
+                        lblWhitePlayer.setText("White Discs: " + board.getDiscCount()[1] + "");
                         if(board.getPlayerTurn() == Color.BLACK)
                             lblGameState.setText("Black Turn");
                         else
@@ -218,6 +213,8 @@ public class GUI extends JFrame {
                 board = new Board();
                 initBoardPanel();
                 lblGameState.setText("Black Turn");
+                lblBlkPlayer.setText("Black Discs: " + board.getDiscCount()[0]);
+                lblWhitePlayer.setText("White Discs: " + board.getDiscCount()[1]);
                 mainPanel.repaint();
                 mainPanel.revalidate();
             });
